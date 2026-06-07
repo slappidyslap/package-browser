@@ -43,5 +43,4 @@ class PackageListView(
 
         log.info("Components of the PackageListView initialized")
     }
-
 }

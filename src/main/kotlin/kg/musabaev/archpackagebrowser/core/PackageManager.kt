@@ -1,5 +1,7 @@
 package kg.musabaev.archpackagebrowser.core
 
+typealias Entry = Pair<String, String>
+
 interface PackageManager {
 
     /**
@@ -7,5 +9,5 @@ interface PackageManager {
      */
     fun getInstalledPackages(): List<String>
 
-    fun getPackageDetails(name: String): Map<String, String>
+    fun getPackageDetails(name: String): List<Entry>
 }

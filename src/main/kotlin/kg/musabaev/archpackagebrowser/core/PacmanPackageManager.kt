@@ -26,7 +26,7 @@ class PacmanPackageManager : PackageManager {
         return packages
     }
 
-    override fun getPackageDetails(name: String): Map<String, String> {
+    override fun getPackageDetails(name: String): List<Entry> {
         log.info("Getting details of the installed package")
         log.info("Executing \"pacman -Qi $name\"")
         val process = ProcessBuilder("pacman", "-Qi", name).start()
@@ -34,18 +34,33 @@ class PacmanPackageManager : PackageManager {
         val code: Int = process.waitFor()
         if (code != 0) {
             log.warn("The command \"pacman -Qi $name\" failed with {}", code)
-            return emptyMap()
+            return emptyList()
         }
 
-        val details = process
+        // Сперва найти индекс первого двоеточия, чтобы по нему разделить запись на ключ и значения
+        // Это сделано, для того чтобы избежать когда у некоторых записей в значении есть двоеточие
+        val outputLines = process
             .inputStream
             .reader()
             .readLines()
+        if (outputLines.isEmpty()) {
+            log.warn("Unable to find first colon in \"pacman -Qi $name\" process output")
+            return emptyList()
+        }
+        val firstColonIndex = outputLines[0].indexOf(":")
+
+        val details = outputLines
             .filter { it.isNotBlank() }
-            .map { detail -> detail.split(":") }
-            .filterNot { it[0] in EXCLUDED_PACKAGE_DETAIL_ENTRIES }
-            .associate { details -> details[0].trimEnd() to details[1].trim() }
+            .map { line -> getPairByPacmanEntry(line, firstColonIndex) }
+            .filterNot { it.first in EXCLUDED_PACKAGE_DETAIL_ENTRIES }
         log.info("The command \"pacman -Qi $name\" finished")
         return details
+    }
+
+    private fun getPairByPacmanEntry(entry: String, delimiterIndex: Int): Pair<String, String> {
+        return if (entry[delimiterIndex] == ':')
+            entry.substring(0 until delimiterIndex).trimEnd() to entry.substring(delimiterIndex + 1).trim()
+        else
+            "" to entry.substring(delimiterIndex + 1).trim()
     }
 }
