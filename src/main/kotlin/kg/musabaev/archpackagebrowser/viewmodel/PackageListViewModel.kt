@@ -1,4 +1,4 @@
-package kg.musabaev.archpackagebrowser
+package kg.musabaev.archpackagebrowser.viewmodel
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.beans.property.StringProperty

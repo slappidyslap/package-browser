@@ -1,16 +1,16 @@
-package kg.musabaev.archpackagebrowser
+package kg.musabaev.archpackagebrowser.view
 
 import javafx.beans.binding.Bindings
 import javafx.scene.control.ListView
-import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
+import kg.musabaev.archpackagebrowser.viewmodel.PackageListViewModel
 import org.slf4j.LoggerFactory
 
 class PackageListView(
     val viewModel: PackageListViewModel
-) : HBox(.0) {
+) : VBox(.0) {
 
     private val log = LoggerFactory.getLogger(PackageListView::class.java)
-
     private val listView: ListView<String>
 
     init {

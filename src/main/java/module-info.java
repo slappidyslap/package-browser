@@ -5,6 +5,5 @@ module kg.musabaev.archpackagebrowser {
     requires kotlinx.coroutines.javafx;
     requires org.slf4j;
 
-    opens kg.musabaev.archpackagebrowser to javafx.fxml;
     exports kg.musabaev.archpackagebrowser;
 }
