@@ -1,7 +1,7 @@
 module kg.musabaev.archpackagebrowser {
     requires javafx.controls;
-    requires javafx.fxml;
     requires kotlin.stdlib;
+    requires org.slf4j;
 
 
     opens kg.musabaev.archpackagebrowser to javafx.fxml;

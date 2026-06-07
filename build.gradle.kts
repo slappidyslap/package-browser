@@ -26,15 +26,19 @@ application {
     mainClass.set("kg.musabaev.archpackagebrowser.HelloApplication")
 }
 kotlin {
-    jvmToolchain(25)
+    jvmToolchain(21)
 }
 
 javafx {
-    version = "25.0.3"
+    version = "21.0.6"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
 dependencies {
+    implementation("ch.qos.logback:logback-classic:1.5.34")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
