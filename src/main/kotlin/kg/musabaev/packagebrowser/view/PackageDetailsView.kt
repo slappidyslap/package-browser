@@ -1,12 +1,12 @@
-package kg.musabaev.archpackagebrowser.view
+package kg.musabaev.packagebrowser.view
 
 import javafx.collections.ListChangeListener
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.VBox
-import kg.musabaev.archpackagebrowser.viewmodel.PackageDetailsViewModel
-import kg.musabaev.archpackagebrowser.viewmodel.PackageListViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageDetailsViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 import org.slf4j.LoggerFactory
 
 class PackageDetailsView(

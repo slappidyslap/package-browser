@@ -1,4 +1,4 @@
-package kg.musabaev.archpackagebrowser.core
+package kg.musabaev.packagebrowser.core
 
 import org.slf4j.LoggerFactory
 

@@ -1,11 +1,11 @@
-package kg.musabaev.archpackagebrowser.viewmodel
+package kg.musabaev.packagebrowser.viewmodel
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.beans.property.StringProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.collections.transformation.FilteredList
-import kg.musabaev.archpackagebrowser.core.PackageManager
+import kg.musabaev.packagebrowser.core.PackageManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.javafx.JavaFx

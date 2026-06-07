@@ -1,4 +1,4 @@
-package kg.musabaev.archpackagebrowser
+package kg.musabaev.packagebrowser
 
 import javafx.application.Application
 import javafx.geometry.Orientation
@@ -6,13 +6,13 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.SplitPane
 import javafx.stage.Stage
-import kg.musabaev.archpackagebrowser.core.PacmanPackageManager
-import kg.musabaev.archpackagebrowser.view.PackageDepsView
-import kg.musabaev.archpackagebrowser.view.PackageDetailsView
-import kg.musabaev.archpackagebrowser.view.PackageListView
-import kg.musabaev.archpackagebrowser.viewmodel.PackageDepsViewModel
-import kg.musabaev.archpackagebrowser.viewmodel.PackageDetailsViewModel
-import kg.musabaev.archpackagebrowser.viewmodel.PackageListViewModel
+import kg.musabaev.packagebrowser.core.PacmanPackageManager
+import kg.musabaev.packagebrowser.view.PackageDepsView
+import kg.musabaev.packagebrowser.view.PackageDetailsView
+import kg.musabaev.packagebrowser.view.PackageListView
+import kg.musabaev.packagebrowser.viewmodel.PackageDepsViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageDetailsViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 
 class MainApplication : Application() {
     override fun start(stage: Stage) {

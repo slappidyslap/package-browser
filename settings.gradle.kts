@@ -1,1 +1,1 @@
-rootProject.name = "arch-package-browser"
+rootProject.name = "package-browser"

@@ -1,4 +1,4 @@
-package kg.musabaev.archpackagebrowser
+package kg.musabaev.packagebrowser
 
 import javafx.application.Application
 

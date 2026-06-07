@@ -1,10 +1,10 @@
-package kg.musabaev.archpackagebrowser.viewmodel
+package kg.musabaev.packagebrowser.viewmodel
 
 import javafx.beans.property.BooleanProperty
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.beans.property.StringProperty
-import kg.musabaev.archpackagebrowser.core.PackageManager
+import kg.musabaev.packagebrowser.core.PackageManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.javafx.JavaFx
 import org.slf4j.LoggerFactory

@@ -19,8 +19,8 @@ tasks.withType<JavaCompile> {
 }
 
 application {
-    mainModule.set("kg.musabaev.archpackagebrowser")
-    mainClass.set("kg.musabaev.archpackagebrowser.MainApplication")
+    mainModule.set("kg.musabaev.packagebrowser")
+    mainClass.set("kg.musabaev.packagebrowser.MainApplication")
 }
 kotlin {
     jvmToolchain(21)

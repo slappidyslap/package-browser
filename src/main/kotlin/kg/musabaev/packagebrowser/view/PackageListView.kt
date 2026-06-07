@@ -1,10 +1,10 @@
-package kg.musabaev.archpackagebrowser.view
+package kg.musabaev.packagebrowser.view
 
 import javafx.scene.control.ListView
 import javafx.scene.control.TextField
 import javafx.scene.control.ToolBar
 import javafx.scene.layout.VBox
-import kg.musabaev.archpackagebrowser.viewmodel.PackageListViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 import org.slf4j.LoggerFactory
 import java.util.function.Predicate
 

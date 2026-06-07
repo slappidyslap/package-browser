@@ -1,11 +1,11 @@
-package kg.musabaev.archpackagebrowser.view
+package kg.musabaev.packagebrowser.view
 
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.control.TextArea
 import javafx.scene.layout.VBox
-import kg.musabaev.archpackagebrowser.viewmodel.PackageDepsViewModel
-import kg.musabaev.archpackagebrowser.viewmodel.PackageListViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageDepsViewModel
+import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 import org.slf4j.LoggerFactory
 
 class PackageDepsView(
