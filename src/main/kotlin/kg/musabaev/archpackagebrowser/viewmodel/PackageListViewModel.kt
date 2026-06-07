@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.beans.property.StringProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
+import javafx.collections.transformation.FilteredList
 import kg.musabaev.archpackagebrowser.core.PackageManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,9 @@ class PackageListViewModel(
     private val log = LoggerFactory.getLogger(PackageListViewModel::class.java)
     private val scope = CoroutineScope(Dispatchers.JavaFx)
 
-    val packages: ObservableList<String> = FXCollections.observableArrayList()
+    val searchQuery: StringProperty = SimpleStringProperty("")
+    val allPackages: ObservableList<String> = FXCollections.observableArrayList()
+    val filteredPackages = FilteredList(allPackages) { true }
     val selectedPackageName: StringProperty = SimpleStringProperty("")
 
     fun loadPackages() {
@@ -27,7 +30,7 @@ class PackageListViewModel(
             val result = withContext(Dispatchers.IO) {
                 packageManager.getInstalledPackages()
             }
-            packages.setAll(result)
+            allPackages.setAll(result)
             log.info("Packages loaded")
         }
     }
