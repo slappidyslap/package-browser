@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "2.1.20"
     id("org.javamodularity.moduleplugin") version "1.8.15"
     id("org.openjfx.javafxplugin") version "0.1.0"
-    id("org.beryx.jlink") version "2.25.0"
+    id("org.beryx.jlink") version "4.0.2"
 }
 
 group = "kg.musabaev"
@@ -51,8 +51,16 @@ tasks.withType<Test> {
 }
 
 jlink {
-    imageZip.set(layout.buildDirectory.file("/distributions/${rootProject.name}-${javafx.platform.classifier}.zip"))
-    options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
+    imageZip.set(
+        file("build/dist/${rootProject.name}-${javafx.platform.classifier}-${javafx.platform.arch}-${version}.zip"))
+    options.set(
+        listOf(
+            "--strip-debug",
+            "--compress", "zip-6",
+            "--no-header-files",
+            "--no-man-pages"
+        )
+    )
     launcher {
         name = rootProject.name
     }
