@@ -28,7 +28,7 @@ class PackageListViewModel(
                 packageManager.getInstalledPackages()
             }
             packages.setAll(result)
+            log.info("Packages loaded")
         }
-        log.info("Packages loaded")
     }
 }

@@ -39,7 +39,7 @@ class PackageListView(
 
         viewModel.loadPackages()
 
-        super.getChildren().addAll(listView)
+        super.children.addAll(listView)
 
         log.info("Components of the PackageListView initialized")
     }
