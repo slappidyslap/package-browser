@@ -19,6 +19,7 @@ class HelloApplication : Application() {
         val scene = Scene(splitPane)
         stage.title = "Hello!"
         stage.scene = scene
+        stage.isMaximized = true
         stage.show()
 
     }
