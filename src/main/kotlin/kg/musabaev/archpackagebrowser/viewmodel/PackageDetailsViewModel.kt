@@ -26,13 +26,16 @@ class PackageDetailsViewModel(
         log.info("Loading package details of the $name")
         packageName.set(name)
         loadJob = scope.launch {
-            isLoading.set(true)
-            val result = withContext(Dispatchers.IO) {
-                packageManager.getPackageDetails(name)
+            try {
+                isLoading.set(true)
+                val result = withContext(Dispatchers.IO) {
+                    packageManager.getPackageDetails(name)
+                }
+                details.setAll(result)
+                log.info("Package details of the $name loaded")
+            } finally {
+                isLoading.set(false)
             }
-            details.setAll(result)
-            log.info("Package details of the $name loaded")
-            isLoading.set(false)
         }
     }
 }
