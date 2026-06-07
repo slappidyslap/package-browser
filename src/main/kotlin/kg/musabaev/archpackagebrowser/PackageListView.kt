@@ -3,11 +3,9 @@ package kg.musabaev.archpackagebrowser
 import javafx.beans.binding.Bindings
 import javafx.scene.control.ListView
 import javafx.scene.layout.HBox
-import kg.musabaev.archpackagebrowser.core.PackageManager
 import org.slf4j.LoggerFactory
 
 class PackageListView(
-    private val packageManager: PackageManager,
     val viewModel: PackageListViewModel
 ) : HBox(.0) {
 
@@ -22,6 +20,8 @@ class PackageListView(
 
         initBinds()
         initComponents()
+
+        log.info("PackageListView initialized")
     }
 
     private fun initBinds() {
@@ -31,14 +31,17 @@ class PackageListView(
         listView.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             viewModel.selectedPackage.value = newValue
         }
+        log.info("Bindings of the PackageListView initialized")
     }
 
     private fun initComponents() {
         log.info("Initializing components of the PackageListView")
 
-        viewModel.packages.addAll(packageManager.getInstalledPackages())
+        viewModel.loadPackages()
 
         super.getChildren().addAll(listView)
+
+        log.info("Components of the PackageListView initialized")
     }
 
 }

@@ -1,21 +1,16 @@
 package kg.musabaev.archpackagebrowser
 
 import javafx.application.Application
-import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.SplitPane
 import javafx.stage.Stage
 import kg.musabaev.archpackagebrowser.core.PacmanPackageManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
-class HelloApplication : Application() {
+class MainApplication : Application() {
     override fun start(stage: Stage) {
-        val packageListViewModel = PackageListViewModel()
+        val packageListViewModel = PackageListViewModel(PacmanPackageManager())
         val splitPane = SplitPane()
-        splitPane.items.add(PackageListView(PacmanPackageManager(), packageListViewModel))
+        splitPane.items.add(PackageListView(packageListViewModel))
         val scene = Scene(splitPane)
         stage.title = "Hello!"
         stage.scene = scene

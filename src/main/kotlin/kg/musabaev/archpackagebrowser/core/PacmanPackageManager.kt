@@ -10,13 +10,14 @@ class PacmanPackageManager : PackageManager {
         log.info("Getting installed packages")
         val process = ProcessBuilder("pacman", "-Qq").start()
         val packages: List<String> = process.inputReader().readLines()
-        log.info("The command \"pacman -Qq\" has been started")
+        log.info("Executing \"pacman -Qq\"")
 
         val code: Int = process.waitFor()
         if (code != 0) {
             log.warn("The command \"pacman -Qq\" failed with {}", code)
             return emptyList()
         } else {
+            log.info("The command \"pacman -Qq\" finished")
             return packages
         }
     }

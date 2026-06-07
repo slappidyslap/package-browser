@@ -8,14 +8,11 @@ plugins {
 }
 
 group = "kg.musabaev"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
 }
-
-val junitVersion = "5.12.1"
-
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
@@ -23,21 +20,27 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("kg.musabaev.archpackagebrowser")
-    mainClass.set("kg.musabaev.archpackagebrowser.HelloApplication")
+    mainClass.set("kg.musabaev.archpackagebrowser.MainApplication")
 }
 kotlin {
     jvmToolchain(21)
 }
 
+val junitVersion = "5.12.1"
+val javaFxVersion = "21.0.6"
+val logbackVersion = "1.5.34"
+val kotlinxCoroutineVersion = "1.11.0"
+
 javafx {
-    version = "21.0.6"
-    modules = listOf("javafx.controls", "javafx.fxml")
+    version = javaFxVersion
+    modules = listOf("javafx.controls")
 }
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.5.34")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutineVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:$kotlinxCoroutineVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -48,9 +51,9 @@ tasks.withType<Test> {
 }
 
 jlink {
-    imageZip.set(layout.buildDirectory.file("/distributions/app-${javafx.platform.classifier}.zip"))
+    imageZip.set(layout.buildDirectory.file("/distributions/${rootProject.name}-${javafx.platform.classifier}.zip"))
     options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
     launcher {
-        name = "app"
+        name = rootProject.name
     }
 }
