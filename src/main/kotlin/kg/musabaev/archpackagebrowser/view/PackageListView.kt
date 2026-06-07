@@ -29,7 +29,7 @@ class PackageListView(
 
         Bindings.bindContentBidirectional(listView.items, viewModel.packages)
         listView.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
-            viewModel.selectedPackage.value = newValue
+            viewModel.selectedPackageName.set(newValue)
         }
         log.info("Bindings of the PackageListView initialized")
     }

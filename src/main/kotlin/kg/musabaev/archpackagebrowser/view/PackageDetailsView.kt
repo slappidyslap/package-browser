@@ -35,27 +35,30 @@ class PackageDetailsView(
     private fun initBinds() {
         log.info("Initializing bindings of the PackageDetailsView")
 
+        name.textProperty().bind(viewModel.packageName)
+        packageListViewModel.selectedPackageName.bindBidirectional(viewModel.packageName)
+
         loadIndicator.visibleProperty().bind(viewModel.isLoading)
         gridPane.visibleProperty().bind(viewModel.isLoading.not())
 
-        packageListViewModel.selectedPackage.addListener { _, _, newValue ->
-            name.text = newValue
+        packageListViewModel.selectedPackageName.addListener { _, _, newValue ->
             viewModel.loadPackageDetails(newValue)
         }
         viewModel.details.addListener(ListChangeListener {
             rebuildGridPane()
         })
+
         log.info("The bindings of the PackageDetailsView initialized")
     }
 
     private fun initComponents() {
-        log.info("Initializing components of the PackageListView")
+        log.info("Initializing components of the PackageDetailsView")
 
         super.children.add(name)
         super.children.add(loadIndicator)
         super.children.add(gridPane)
 
-        log.info("Components of the PackageListView initialized")
+        log.info("Components of the PackageDetailsView initialized")
     }
 
     private fun rebuildGridPane() {
@@ -64,10 +67,4 @@ class PackageDetailsView(
             gridPane.addRow(i, Label(entry.first), Label(entry.second))
         }
     }
-
-//    private fun <S, V> TableView<S>.addColumn(columnName: String, getter: (S) -> V) {
-//        val keyColumn = TableColumn<S, V>(columnName)
-//        keyColumn.cellValueFactory = Callback { ReadOnlyObjectWrapper(getter(it.value)) }
-//        this.columns.add(keyColumn)
-//    }
 }

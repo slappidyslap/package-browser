@@ -19,7 +19,7 @@ class PackageListViewModel(
     private val scope = CoroutineScope(Dispatchers.JavaFx)
 
     val packages: ObservableList<String> = FXCollections.observableArrayList()
-    val selectedPackage: StringProperty = SimpleStringProperty("")
+    val selectedPackageName: StringProperty = SimpleStringProperty("")
 
     fun loadPackages() {
         log.info("Loading packages")

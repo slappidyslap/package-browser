@@ -10,4 +10,6 @@ interface PackageManager {
     fun getInstalledPackages(): List<String>
 
     fun getPackageDetails(name: String): List<Entry>
+
+    fun getPackageDeps(name: String): String
 }
