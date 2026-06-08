@@ -27,10 +27,10 @@ class PackageListViewModel(
 
     init {
         searchQuery.addListener { _, _, new ->
-            if (new.isNotBlank()) {
-                filteredPackages.predicate = Predicate<String> {
-                    it.contains(new, ignoreCase = true)
-                }
+            filteredPackages.predicate = if (new.isBlank()) {
+                Predicate { true }
+            } else {
+                Predicate<String> { it.contains(new.trim(), ignoreCase = true) }
             }
         }
         loadPackages()
