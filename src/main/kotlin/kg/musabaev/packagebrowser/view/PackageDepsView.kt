@@ -34,12 +34,12 @@ class PackageDepsView(
     private fun initBinds() {
         log.info("Initializing bindings of the PackageDepsView")
 
+        packageListViewModel.selectedPackageName.bindBidirectional(viewModel.packageName)
+
         title.textProperty().bind(viewModel.packageName)
         loadIndicator.visibleProperty().bind(viewModel.isLoading)
         textArea.visibleProperty().bind(viewModel.isLoading.not())
         textArea.textProperty().bind(viewModel.depsTree)
-
-        packageListViewModel.selectedPackageName.bindBidirectional(viewModel.packageName)
 
         log.info("The bindings of the PackageDepsView initialized")
     }

@@ -35,9 +35,9 @@ class PackageDetailsView(
     private fun initBinds() {
         log.info("Initializing bindings of the PackageDetailsView")
 
-        name.textProperty().bind(viewModel.packageName)
         packageListViewModel.selectedPackageName.bindBidirectional(viewModel.packageName)
 
+        name.textProperty().bind(viewModel.packageName)
         loadIndicator.visibleProperty().bind(viewModel.isLoading)
         gridPane.visibleProperty().bind(viewModel.isLoading.not())
 
