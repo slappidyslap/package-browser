@@ -17,6 +17,7 @@ import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 class MainApplication : Application() {
     override fun start(stage: Stage) {
         val scene = Scene(buildGui())
+        scene.stylesheets.add(javaClass.getResource("/style.css")!!.toExternalForm())
         stage.title = "Package browser"
         stage.scene = scene
         stage.isMaximized = true
