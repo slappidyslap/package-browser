@@ -13,31 +13,14 @@ class PacmanPackageManager : PackageManager {
 
     override fun getInstalledPackages(): List<String> {
         log.info("Getting installed packages")
-        log.info("Executing \"pacman -Qq\"")
-        val process = ProcessBuilder("pacman", "-Qq").start()
-
-        val code: Int = process.waitFor()
-        if (code != 0) {
-            log.warn("The command \"pacman -Qq\" failed with {}:", code)
-            log.warn(process.errorReader().readText())
-            return emptyList()
-        }
+        val process = execCommand("pacman", "-Qq") ?: return emptyList()
         val packages: List<String> = process.inputReader().readLines()
-        log.info("The command \"pacman -Qq\" finished")
         return packages
     }
 
     override fun getPackageDetails(name: String): List<Entry> {
-        log.info("Getting details of the package $name")
-        log.info("Executing \"pacman -Qi $name\"")
-        val process = ProcessBuilder("pacman", "-Qi", name).start()
-
-        val code: Int = process.waitFor()
-        if (code != 0) {
-            log.warn("The command \"pacman -Qi $name\" failed with {}:", code)
-            log.warn(process.errorReader().readText())
-            return emptyList()
-        }
+        log.info("Getting details of the package {}", name)
+        val process = execCommand("pacman", "-Qi", name) ?: return emptyList()
 
         // Сперва найти индекс первого двоеточия, чтобы по нему разделить запись на ключ и значения
         // Это сделано, для того чтобы избежать когда у некоторых записей в значении есть двоеточие
@@ -45,7 +28,7 @@ class PacmanPackageManager : PackageManager {
             .inputReader()
             .readLines()
         if (outputLines.isEmpty()) {
-            log.warn("Unable to find first colon in \"pacman -Qi $name\" process output")
+            log.warn("Unable to find first colon in 'pacman -Qi {}' process output", name)
             return emptyList()
         }
         val firstColonIndex = outputLines[0].indexOf(":")
@@ -54,11 +37,10 @@ class PacmanPackageManager : PackageManager {
             .filter { it.isNotBlank() }
             .map { line -> getPairByPacmanEntry(line, firstColonIndex) }
             .filterNot { it.first in EXCLUDED_PACKAGE_DETAIL_ENTRIES }
-        log.info("The command \"pacman -Qi $name\" finished")
         return details
     }
 
-    private fun getPairByPacmanEntry(entry: String, delimiterIndex: Int): Pair<String, String> {
+    private fun getPairByPacmanEntry(entry: String, delimiterIndex: Int): Entry {
         return if (entry[delimiterIndex] == ':')
             entry.substring(0 until delimiterIndex).trimEnd() to entry.substring(delimiterIndex + 1).trim()
         else
@@ -66,17 +48,22 @@ class PacmanPackageManager : PackageManager {
     }
 
     override fun getPackageDeps(name: String): String {
-        log.info("Getting dependencies of the package $name")
-        log.info("Executing \"pactree $name\"")
-        val process = ProcessBuilder("pactree", name).start()
-
-        val code: Int = process.waitFor()
-        if (code != 0) {
-            log.warn("The command \"pactree $name\" failed with {}:", code)
-            log.warn(process.errorReader().readText())
-            return ""
-        }
-        log.info("The command \"pactree $name\" finished")
+        log.info("Getting dependencies of the package {}", name)
+        val process = execCommand("pactree", name) ?: return ""
         return process.inputReader().readText().trim()
+    }
+
+    private fun execCommand(command: String, vararg args: String): Process? {
+        val commandStr = "$command ${args.joinToString(" ")}"
+        log.info("Executing '{}'", commandStr)
+        val process = ProcessBuilder(command, *args).start()
+        val code = process.waitFor()
+        if (code != 0) {
+            log.warn("The command '{}' failed with {}", commandStr, code)
+            log.warn(process.errorReader().readText())
+            return null
+        }
+        log.info("The command '{}' finished", commandStr)
+        return process
     }
 }
