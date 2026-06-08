@@ -40,9 +40,7 @@ class PackageDepsView(
         textArea.textProperty().bind(viewModel.depsTree)
 
         packageListViewModel.selectedPackageName.bindBidirectional(viewModel.packageName)
-        packageListViewModel.selectedPackageName.addListener { _, _, newValue ->
-            viewModel.loadPackageDeps(newValue)
-        }
+
         log.info("The bindings of the PackageDepsView initialized")
     }
 

@@ -41,13 +41,9 @@ class PackageDetailsView(
         loadIndicator.visibleProperty().bind(viewModel.isLoading)
         gridPane.visibleProperty().bind(viewModel.isLoading.not())
 
-        packageListViewModel.selectedPackageName.addListener { _, _, newValue ->
-            viewModel.loadPackageDetails(newValue)
-        }
         viewModel.details.addListener(ListChangeListener {
             rebuildGridPane()
         })
-
         log.info("The bindings of the PackageDetailsView initialized")
     }
 

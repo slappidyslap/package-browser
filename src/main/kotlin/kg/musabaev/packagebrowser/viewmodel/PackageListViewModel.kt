@@ -12,6 +12,7 @@ import kotlinx.coroutines.javafx.JavaFx
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.slf4j.LoggerFactory
+import java.util.function.Predicate
 
 class PackageListViewModel(
     private val packageManager: PackageManager
@@ -24,7 +25,18 @@ class PackageListViewModel(
     val filteredPackages = FilteredList(allPackages) { true }
     val selectedPackageName: StringProperty = SimpleStringProperty("")
 
-    fun loadPackages() {
+    init {
+        searchQuery.addListener { _, _, new ->
+            if (new.isNotBlank()) {
+                filteredPackages.predicate = Predicate<String> {
+                    it.contains(new, ignoreCase = true)
+                }
+            }
+        }
+        loadPackages()
+    }
+
+    private fun loadPackages() {
         log.info("Loading packages")
         scope.launch {
             val result = withContext(Dispatchers.IO) {

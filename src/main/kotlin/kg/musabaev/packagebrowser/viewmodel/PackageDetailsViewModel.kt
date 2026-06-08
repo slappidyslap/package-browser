@@ -15,7 +15,13 @@ class PackageDetailsViewModel(
 
     val details: ObservableList<Entry> = FXCollections.observableArrayList()
 
-    fun loadPackageDetails(name: String) {
+    init {
+        packageName.addListener { _, _, new ->
+            loadPackageDetails(new)
+        }
+    }
+
+    private fun loadPackageDetails(name: String) {
         log.info("Loading package details of the {}", name)
         packageName.set(name)
         loadWithLoading {

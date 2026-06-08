@@ -14,7 +14,13 @@ class PackageDepsViewModel(
 
     val depsTree: StringProperty = SimpleStringProperty("")
 
-    fun loadPackageDeps(name: String) {
+    init {
+        packageName.addListener { _, _, new ->
+            loadPackageDeps(new)
+        }
+    }
+
+    private fun loadPackageDeps(name: String) {
         log.info("Loading deps of the package {}", name)
         packageName.set(name)
         loadWithLoading {

@@ -34,13 +34,6 @@ class PackageListView(
         log.info("Initializing bindings of the PackageListView")
 
         searchField.textProperty().bindBidirectional(viewModel.searchQuery)
-        viewModel.searchQuery.addListener { _, _, new ->
-            if (new.isNotBlank()) {
-                viewModel.filteredPackages.predicate = Predicate<String> {
-                    it.contains(new, ignoreCase = true)
-                }
-            }
-        }
 
         listView.items = viewModel.filteredPackages
         listView.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
@@ -56,7 +49,6 @@ class PackageListView(
         toolBar.items.add(searchField)
         super.children.add(toolBar)
 
-        viewModel.loadPackages()
         super.children.addAll(listView)
 
         log.info("Components of the PackageListView initialized")
