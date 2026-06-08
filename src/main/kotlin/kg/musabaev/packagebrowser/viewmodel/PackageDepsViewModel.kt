@@ -22,7 +22,7 @@ class PackageDepsViewModel(
 
     fun loadPackageDeps(name: String) {
         loadJob?.cancel()
-        log.info("Loading deps of the package $name")
+        log.info("Loading deps of the package {}", name)
         packageName.set(name)
         loadJob = scope.launch {
             try {
@@ -31,7 +31,7 @@ class PackageDepsViewModel(
                     packageManager.getPackageDeps(name)
                 }
                 depsTree.set(result)
-                log.info("Deps of the package $name loaded")
+                log.info("Deps of the package {} loaded", name)
             } finally {
                 isLoading.set(false)
             }

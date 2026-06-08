@@ -23,7 +23,7 @@ class PackageDetailsViewModel(
 
     fun loadPackageDetails(name: String) {
         loadJob?.cancel()
-        log.info("Loading package details of the $name")
+        log.info("Loading package details of the {}", name)
         packageName.set(name)
         loadJob = scope.launch {
             try {
@@ -32,7 +32,7 @@ class PackageDetailsViewModel(
                     packageManager.getPackageDetails(name)
                 }
                 details.setAll(result)
-                log.info("Package details of the $name loaded")
+                log.info("Package details of the {} loaded", name)
             } finally {
                 isLoading.set(false)
             }
