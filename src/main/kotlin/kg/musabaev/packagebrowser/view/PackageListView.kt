@@ -6,7 +6,6 @@ import javafx.scene.control.ToolBar
 import javafx.scene.layout.VBox
 import kg.musabaev.packagebrowser.viewmodel.PackageListViewModel
 import org.slf4j.LoggerFactory
-import java.util.function.Predicate
 
 class PackageListView(
     val viewModel: PackageListViewModel
