@@ -1,6 +1,6 @@
 # Package Browser
 
-JavaFX + Kotlin
+JavaFX + Kotlin + Coroutine
 
 Поддержка токо пакетного менеджера pacman
 
